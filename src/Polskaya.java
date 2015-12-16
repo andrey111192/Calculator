@@ -1,9 +1,6 @@
-package SimpleGUI;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import static java.lang.Character.isDigit;
 
 /**
@@ -13,27 +10,27 @@ public class Polskaya {
     public static String main(String name) throws IOException {
         //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         //String name = reader.readLine();
-        if (name.startsWith("+")) name = name.substring(1);
-        for (int i = 0; i < name.length(); i++) {
+        if(name.startsWith("+")){name = name.substring(1);}
+        for(int i = 0;i<name.length();i++) {
             char[] calc1 = name.toCharArray();
-            if (calc1[i] == '(' && calc1[i + 1] == '+') {
-                name = name.substring(0, i + 1) + name.substring(i + 2, name.length());
+            if(calc1[i] == '(' && calc1[i+1] == '+'){
+                name = name.substring(0,i+1)+name.substring(i+2,name.length());
             }
         }
 
-        for (int i = 0; i < (name.length() - 1); i++) {
+        for(int i = 0;i<(name.length()-1);i++) {
             char[] calc1 = name.toCharArray();
-            if (calc1[i] == '(' && calc1[i + 1] == '+') {
-                name = name.substring(0, i + 1) + name.substring(i + 2, name.length());
+            if(calc1[i] == '(' && calc1[i+1] == '+'){
+                name = name.substring(0,i+1)+name.substring(i+2,name.length());
             }
-            if (isDigit(calc1[i]) && calc1[i + 1] == '(') {
-                name = name.substring(0, i + 1) + "*" + name.substring(i + 1, name.length());
+            if( isDigit(calc1[i]) && calc1[i+1] == '('){
+                name = name.substring(0,i+1) + "*"  + name.substring(i+1,name.length());
             }
-            if (calc1[i] == ')' && isDigit(calc1[i + 1])) {
-                name = name.substring(0, i + 1) + "*" + name.substring(i + 1, name.length());
+            if( calc1[i] == ')' && isDigit(calc1[i+1])){
+                name = name.substring(0,i+1) + "*" + name.substring(i+1,name.length());
             }
-            if (calc1[i] == ')' && calc1[i + 1] == '(') {
-                name = name.substring(0, i + 1) + "*" + name.substring(i + 1, name.length());
+            if( calc1[i] == ')' && calc1[i+1] == '('){
+                name = name.substring(0,i+1) + "*" + name.substring(i+1,name.length());
             }
         }
         char[] calc = name.toCharArray();
@@ -58,11 +55,11 @@ public class Polskaya {
                 num[i_num] = num[i_num].trim();
             } else {
                 if (i_oper == 0) {
-                    if (calc[i] == '-') num[i_num] = "0";
+                    if(calc[i] == '-')num[i_num] = "0";
                     oper[i_oper] = String.valueOf(calc[i]);
                     i_oper++;
-                    if (oper[i_oper - 1].equals("(")) i_num--;
-                } else {
+                    if (oper[i_oper - 1].equals("(")) i_num--;}
+                else {
                     switch (calc[i]) {
                         case '+':
                             while (i_oper != 0) {
@@ -79,15 +76,13 @@ public class Polskaya {
                         case '-':
                             while (i_oper != 0) {
                                 //if (oper[i_oper - 1].equals("-") ) {}
-                                if (oper[i_oper - 1].equals("(")) {
+                                if (oper[i_oper - 1].equals("(") ) {
                                     num[i_num] = "0";
                                     break;
                                 } else {
                                     num[i_num += 1] = oper[i_oper -= 1];
                                     oper[i_oper] = "";
-                                    if (i_oper != 0) {
-                                        if (oper[i_oper - 1].equals("(")) break;
-                                    }
+                                    if (i_oper != 0){if(oper[i_oper - 1].equals("(")){break;}}
                                 }
                             }
                             oper[i_oper] = String.valueOf(calc[i]);
@@ -95,8 +90,8 @@ public class Polskaya {
                             break;
                         case '*':
                             while (i_oper != 0) {
-                                if (oper[i_oper - 1].equals("+") || oper[i_oper - 1].equals("-") || oper[i_oper - 1].equals("(") || oper[i_oper - 1].equals("("))
-                                    break;
+                                if (oper[i_oper - 1].equals("+") || oper[i_oper - 1].equals("-") || oper[i_oper - 1].equals("(") || oper[i_oper - 1].equals("(")){
+                                    break;}
                                 else {
                                     num[i_num += 1] = oper[i_oper -= 1];
                                     oper[i_oper] = "";
@@ -107,8 +102,8 @@ public class Polskaya {
                             break;
                         case '/':
                             while (i_oper != 0) {
-                                if (oper[i_oper - 1].equals("+") || oper[i_oper - 1].equals("-") || oper[i_oper - 1].equals("(") || oper[i_oper - 1].equals("("))
-                                    break;
+                                if (oper[i_oper - 1].equals("+") || oper[i_oper - 1].equals("-") || oper[i_oper - 1].equals("(") || oper[i_oper - 1].equals("(")){
+                                    break;}
                                 else {
                                     num[i_num += 1] = oper[i_oper -= 1];
                                     oper[i_oper] = " ";
@@ -122,7 +117,7 @@ public class Polskaya {
                                 if (oper[i_oper - 1].equals("^")) {
                                     num[i_num += 1] = oper[i_oper -= 1];
                                     oper[i_oper] = "";
-                                } else break;
+                                } else {break;}
                             }
                             oper[i_oper] = String.valueOf(calc[i]);
                             i_oper++;
@@ -159,9 +154,9 @@ public class Polskaya {
             i_num++;
             num[i_num] = oper[p];
         }
-        System.out.println(i_num);
-        ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(num));
-        System.out.println(arrayList);
+         System.out.println(i_num);
+               ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(num));
+               System.out.println(arrayList);
         for (int j = 0; j <= i_num; j++) {
             if (num[j].equals("+") || num[j].equals("-") || num[j].equals("*") || num[j].equals("/") || num[j].equals("^")) {
                 double f_num = Double.parseDouble(num[j - 2]);
@@ -170,7 +165,6 @@ public class Polskaya {
                 switch (num[j]) {
                     case "*":
                         c = Calculation.multiplication(f_num, s_num);
-                        //System.out.println(c);
                         break;
                     case "+":
                         c = Calculation.summ(f_num, s_num);
@@ -204,7 +198,7 @@ public class Polskaya {
 //        System.out.println(num[0]);
 //        }
 
-        return num[0];
+    return num[0];
     }
 
 }
